@@ -29,6 +29,7 @@ Imports:
     fs,
     glue,
     memoise,
+    robotstxt,
     rlang
 Depends: 
     R (>= 2.10)
