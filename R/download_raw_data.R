@@ -5,25 +5,24 @@
 #' @return character. path to excel file, invisibly.
 rki_download_xlsx <- function(out_folder = here::here()) {
     BASE_URL <- "https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.html"
-    hrefs <- BASE_URL %>% 
-        xml2::read_html() %>% 
-        rvest::html_nodes("a.downloadLink") %>% 
+    hrefs <- BASE_URL %>%
+        polite_read_html() %>%
+        rvest::html_nodes("a.downloadLink") %>%
         rvest::html_attr("href")
     # assumes that the file is called Impfquotenmonitoring.xlsx
     impf_path <- hrefs %>% stringr::str_subset("Impfquotenmonitoring.xlsx")
     impf_url <- paste0("https://www.rki.de/", impf_path)[1] # only download first one
 
-    # use curl to download to file 
+    # use curl to download to file
     # timestamp for file
-    ts_file <- lubridate::now(tz = "Europe/Berlin") %>% 
-        lubridate::format_ISO8601() %>% 
+    ts_file <- lubridate::now(tz = "Europe/Berlin") %>%
+        lubridate::format_ISO8601() %>%
         stringr::str_replace_all(":", "")
-    xlsx_path <- fs::path(out_folder, glue::glue("{ts_file}_impfmonitoring.xlsx"))
-    curl::curl_download(impf_url, xlsx_path)
+    xlsx_path <- polite_download_file(impf_url, path = out_folder, verbose = TRUE, destfile = glue::glue("{ts_file}_impfmonitoring.xlsx"))
     invisible(xlsx_path)
 }
 
-#' store sheets from xlsx as csvs 
+#' store sheets from xlsx as csvs
 #' @param xlsx_path character. path to xlsx file
 #' @param out_folder folder to store the csv files. defaults to here::here()
 #' @description store sheets from xlsx as csvs (for easier debugging).

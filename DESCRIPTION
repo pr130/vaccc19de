@@ -22,6 +22,7 @@ Imports:
     janitor,
     usethis,
     fs,
-    glue
+    glue,
+    polite
 Depends: 
     R (>= 2.10)
