@@ -1,6 +1,9 @@
-# MIT License
+# Test data 
+Data in folder `tests/testthat/test_data` was downloaded from the Robert Koch Institut's website on 2020-12-30: https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.html 
+# Code
+## MIT License
 
-Copyright (c) 2020 vaccc19de authors
+Copyright (c) 2020 Frie Preu
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

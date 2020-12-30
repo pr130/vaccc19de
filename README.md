@@ -30,3 +30,7 @@ rki_extract_cumulative_data(path)
 ## Roadmap
 - function to "longify" the data by indication
 - more robust data cleaning
+
+## Licensing information
+
+Data in folder `tests/testthat/test_data` was downloaded from the Robert Koch Institut's website on 2020-12-30: https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.html 

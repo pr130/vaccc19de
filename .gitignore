@@ -5,3 +5,6 @@
 
 # DS Store
 .DS_Store
+
+# open xlsx files
+~*.xlsx
