@@ -3,6 +3,7 @@
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![R-CMD-check](https://github.com/friep/vaccc19de/workflows/R-CMD-check/badge.svg)](https://github.com/friep/vaccc19de/actions)
 <!-- badges: end -->
 
 The goal of vaccc19de (*vacc*inations *c*ovid *19* *de*utschland) is to provide functions to easily get and extract data on the progress of vaccinations in German Bundesländer that is provided daily by the Robert-Koch-Institut (RKI) on [this page](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.html). 

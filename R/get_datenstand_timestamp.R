@@ -1,5 +1,5 @@
 #' get timestamp of "Datenstand"
-#' @param .data raw data frame of sheet "Erläuterung"
+#' @param .data raw data frame of sheet "Erlaeuterung"
 #' @return timestamp of Datenstand
 rki_get_timestamp <- function(.data) {
   if (ncol(.data) == 1) {
@@ -17,14 +17,14 @@ rki_get_timestamp <- function(.data) {
 
 
 
-#' parse German timestamp with "Uhr" at the end - thankfully lubridate is clever like that
+# parse German timestamp with "Uhr" at the end - thankfully lubridate is clever like that
 rki_parse_ts <- function(s) {
   ts <- lubridate::dmy_hm(s, tz = "Europe/Berlin")
   return(ts)
 }
 
-#' find the row with "Datenstand"
-#' hopefully they don't change the format of this!!
+# find the row with "Datenstand"
+# hopefully they don't change the format of this!!
 rki_extract_ts_string <- function(raw) {
   # only one column in this sheet
   # row needs to start with Datenstand and needs to be the first row to do so

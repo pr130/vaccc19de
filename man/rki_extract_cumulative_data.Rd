@@ -15,7 +15,7 @@ rki_extract_cumulative_data(xlsx_path, out_folder = here::here())
 tibble. the data as displayed in sheet 2 enriched with the Datenstand timestamp from sheet 1.
 }
 \description{
-returns the data as displayed in sheet 2 enriched with the Datenstand timestamp from sheet 1. 
+returns the data as displayed in sheet 2 enriched with the Datenstand timestamp from sheet 1.
 When collected over multiple days, this will result in cumulative data because the individual columns do not display the difference but total numbers
 (except for column "differenz_zum_vortag").
 }

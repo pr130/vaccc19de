@@ -1,11 +1,11 @@
 Package: vaccc19de
 Type: Package
-Title: Download and Extract Data On Vaccination Progress in German Bundesländer from RKI Website
+Title: Download and Extract Data On Vaccination Progress in German Bundeslaender from RKI Website
 Version: 0.1.0
 Author: person(family = "Preu", given = "Frie", email = "fr1e@pm.me", role = c("aut", "cre"))
 Maintainer: Frie Preu <fr1e@pm.me>
 Description: This package helps with downloading the daily updates on the progress 
-    of the vaccinations in the German Bundesländer from the website of the Robert-Koch-Institut (RKI).
+    of the vaccinations in the German Bundeslaender from the website of the Robert-Koch-Institut (RKI).
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -21,8 +21,12 @@ Imports:
     lubridate,
     janitor,
     usethis,
+    httr,
+    purrr,
+    readr,
+    rvest,
     fs,
     glue,
-    polite
+    rlang
 Depends: 
     R (>= 2.10)

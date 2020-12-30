@@ -7,7 +7,7 @@
 rki_get_timestamp(.data)
 }
 \arguments{
-\item{.data}{raw data frame of sheet "Erläuterung"}
+\item{.data}{raw data frame of sheet "Erlaeuterung"}
 }
 \value{
 timestamp of Datenstand
