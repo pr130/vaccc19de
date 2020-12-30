@@ -6,7 +6,7 @@
 [![R-CMD-check](https://github.com/friep/vaccc19de/workflows/R-CMD-check/badge.svg)](https://github.com/friep/vaccc19de/actions)
 <!-- badges: end -->
 
-The goal of vaccc19de (*vacc*inations *c*ovid *19* *de*utschland) is to provide functions to easily get and extract data on the progress of vaccinations in German Bundesländer that is provided daily by the Robert-Koch-Institut (RKI) on [this page](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.html). 
+The goal of vaccc19de (**vacc**inations **c**ovid **19** **de**utschland) is to provide functions to easily get and extract data on the progress of vaccinations in German Bundesländer that is provided daily by the Robert-Koch-Institut (RKI) on [this page](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.html). The package is used to automatically collect data in the accompanying [vaccc19de_rki_data repository](https://github.com/friep/vaccc19de_rki_data).
 
 ## Installation
 
