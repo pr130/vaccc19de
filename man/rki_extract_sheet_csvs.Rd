@@ -11,6 +11,9 @@ rki_extract_sheet_csvs(xlsx_path, out_folder = here::here())
 
 \item{out_folder}{folder to store the csv files. defaults to here::here()}
 }
+\value{
+the paths of the csvs, invisibly.
+}
 \description{
 store sheets from xlsx as csvs (for easier debugging).
 }

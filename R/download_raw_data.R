@@ -26,15 +26,18 @@ rki_download_xlsx <- function(out_folder = here::here()) {
 #' @param xlsx_path character. path to xlsx file
 #' @param out_folder folder to store the csv files. defaults to here::here()
 #' @description store sheets from xlsx as csvs (for easier debugging).
+#' @return the paths of the csvs, invisibly.
 #' @export
 rki_extract_sheet_csvs <- function(xlsx_path, out_folder = here::here()) {
     xlsx_file <- fs::path_file(xlsx_path)
     common <- fs::path_ext_remove(xlsx_file)
     sheets <- readxl::excel_sheets(xlsx_path)
-    purrr::imap(sheets, function(sheet, i) {
+    paths <- purrr::imap_chr(sheets, function(sheet, i) {
         raw <- readxl::read_excel(xlsx_path, sheet)
         sheet_name <- tolower(sheet)
         path <- fs::path(out_folder, glue::glue("{common}_sheet{i}_{sheet_name}.csv"))
         readr::write_csv(raw, path)
+        return(path)
     })
+    invisible(paths)
 }
