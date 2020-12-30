@@ -15,10 +15,10 @@ rki_extract_cumulative_data <- function(xlsx_path, out_folder = here::here()) {
   bundesland_data_cleaned$ts_datenstand <- ts_datenstand
 
   # get {timestamp}_impfmonitoring part of path 
-  without_ext <- xlsx_path %>% fs::path_file() %>% fs::path_ext_remove()
+  without_ext <- get_common_path(xlsx_path)
   bundesland_data_cleaned <- bundesland_data_cleaned %>% 
     dplyr::mutate(ts_download = lubridate::now(tz = "Europe/Berlin")) %>% 
-    dplyr::select(ts_datenstand, ts_download, dplyr::everything()) 
+    dplyr::select(ts_datenstand, ts_download, dplyr::everything())
   
   bundesland_data_cleaned %>%  readr::write_csv(fs::path(out_folder, glue::glue("{without_ext}_kumulativ.csv")))
 
