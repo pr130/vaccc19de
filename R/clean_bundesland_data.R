@@ -10,7 +10,7 @@ rki_clean_bundesland <- function(.data) {
 
   tmp <- .data %>%
     janitor::clean_names() %>%
-    dplyr::mutate(bundesland_notes = "")
+    dplyr::mutate(notes = "")
 
   ## get annotations
   annotations <- tmp %>%
@@ -18,7 +18,7 @@ rki_clean_bundesland <- function(.data) {
     janitor::remove_empty("cols") %>%
     dplyr::rename(annotation = .data$bundesland) %>%
     dplyr::mutate(star_count = stringr::str_count(.data$annotation, "\\*"),
-                  annotation = stringr::str_replace_all(.data$annotation, "\\*", ""))
+                  annotation = stringr::str_trim(stringr::str_replace_all(.data$annotation, "\\*", "")))
 
 
   if(any(stringr::str_detect(tmp$bundesland, "\\*"))){ ## if there are any annotations for a bundesland
@@ -26,16 +26,16 @@ rki_clean_bundesland <- function(.data) {
     if(nrow(annotations)==2){  ## if there are exactly two annotations
 
       tmp <- tmp %>%
-        dplyr::mutate(bundesland_notes = ifelse(stringr::str_detect(.data$bundesland, "\\*\\*"),
+        dplyr::mutate(notes = ifelse(stringr::str_detect(.data$bundesland, "\\*\\*"),
                                                annotations$annotation[2],
                                                NA_character_))
 
     } else if(nrow(annotations)>2){ ## if there are more than two annotations
       for (jj in 2:nrow(annotations)) { ## go through all annotations and paste them together with a \n
         tmp <- tmp %>%
-          dplyr::mutate(bundesland_notes = ifelse(stringr::str_detect(.data$bundesland, strrep("\\*", jj)),
-                                                 paste0(.data$bundesland_notes, annotations$annotation[jj], "\n"),
-                                                 .data$bundesland_notes))
+          dplyr::mutate(notes = ifelse(stringr::str_detect(.data$bundesland, strrep("\\*", jj)),
+                                                 paste0(.data$notes, annotations$annotation[jj], "\n"),
+                                                 .data$notes))
       }
     }
   }
@@ -44,7 +44,7 @@ rki_clean_bundesland <- function(.data) {
   tmp2 <- tmp %>%
     dplyr::slice_head(n = 16) %>%
     dplyr::mutate(bundesland = stringr::str_replace_all(.data$bundesland, "\\*", ""),  # replace ** in data
-                  bundesland_notes = ifelse(.data$bundesland_notes == "", NA_character_, .data$bundesland_notes)) # empty strings are NA
+                  notes = ifelse(.data$notes == "", NA_character_, .data$notes)) # empty strings are NA
 
   # merge
   merged <- dplyr::inner_join(mapping, tmp2, by = "bundesland")
