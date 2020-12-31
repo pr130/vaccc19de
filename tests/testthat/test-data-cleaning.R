@@ -32,3 +32,8 @@ test_that("note extraction works with more than 2 notes", {
 
 })
 
+test_that("note extraction works with no note", {
+  df <- readxl::read_excel("test_data/impfmonitoring_no_notes.xlsx", sheet = 2)
+  cleaned <- rki_clean_bundesland(df)
+  expect_true(all(is.na(cleaned$notes)))
+})
