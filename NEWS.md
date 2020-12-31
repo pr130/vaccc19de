@@ -1,3 +1,6 @@
+# vaccc19de 0.2.0
+* `rki_extract_cumulative_data` now parses comments (indicated by `*` in the excel sheet) into a separate column `notes`
+
 # vaccc19de 0.1.0
 * functions `rki_download_xlsx` to download the xlsx file from the RKI website and store it in ia given folder
 * function `rki_extract_sheet_csvs` to extract the two sheets from the xlsx and store them as csvs in a given folder
