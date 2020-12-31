@@ -5,3 +5,10 @@
 get_common_path <- function(xlsx_path) {
   return(xlsx_path %>% fs::path_file() %>% fs::path_ext_remove())
 }
+
+# get download_ts from xlsx path
+get_download_ts_from_path <- function(xlsx_path) {
+  common <- xlsx_path %>% fs::path_file() %>% fs::path_ext_remove()
+  ts <- lubridate::ymd_hms(common, tz = "Europe/Berlin")
+  ts
+}
