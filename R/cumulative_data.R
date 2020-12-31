@@ -22,3 +22,12 @@ rki_extract_cumulative_data <- function(xlsx_path) {
   bundesland_data_cleaned
 
 }
+
+
+#' download time series from GitHub
+#' @export
+#' @return tibble. Cumulative time series
+#' @description Downloads cumulative time series from the `vaccc19de_rki_data` repository, more specifically https://raw.githubusercontent.com/friep/vaccc19de_rki_data/main/data/cumulative_time_series.csv
+rki_download_cumulative_ts <- function() {
+  readr::read_csv("https://raw.githubusercontent.com/friep/vaccc19de_rki_data/main/data/cumulative_time_series.csv")
+}
