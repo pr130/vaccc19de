@@ -1,8 +1,8 @@
-#' decumulate cumulative time series
+#' 'decumulate' cumulative data to get diffs
 #' @param cumulative_data tibble. the cumulative time series. 
-#' @return tibble. "decumulated" time series, i.e. where variables represent the new counts since the previous count. 
-#' @export 
-rki_decumulate_data <- function(cumulative_data) {
+#' @return tibble. "decumulated" time series with the diffs, i.e. where values represent the difference since the previous update. 
+#' @export
+rki_extract_diffs <- function(cumulative_data) {
 
     # grouped lag 
     calc_lag <- function(col) {
@@ -29,10 +29,10 @@ rki_decumulate_data <- function(cumulative_data) {
 }
 
 
-#' download decumulated time series from GitHub
+#' download diffs time series from GitHub
 #' @export
-#' @return tibble. 'Decumulated' time series
-#' @description Downloads 'decumulated' time series from the `vaccc19de_rki_data` repository, more specifically https://raw.githubusercontent.com/friep/vaccc19de_rki_data/main/data/decumulated_time_series.csv
-rki_download_decumulated_ts <- function() {
-    readr::read_csv("https://raw.githubusercontent.com/friep/vaccc19de_rki_data/main/data/decumulated_time_series.csv")
+#' @return tibble. Diffs time series with the diffs (created by `rki_diffs`)
+#' @description Downloads the diffs / 'decumulated' time series from the `vaccc19de_rki_data` repository, more specifically https://raw.githubusercontent.com/friep/vaccc19de_rki_data/main/data/decumulated_time_series.csv
+rki_download_diffs_ts <- function() {
+    readr::read_csv("https://raw.githubusercontent.com/friep/vaccc19de_rki_data/main/data/diffs_time_series.csv")
 }
