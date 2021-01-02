@@ -6,6 +6,9 @@
 \usage{
 rki_decumulate_data(cumulative_data)
 }
+\arguments{
+\item{cumulative_data}{tibble. the cumulative time series.}
+}
 \value{
 tibble. "decumulated" time series, i.e. where variables represent the new counts since the previous count.
 }

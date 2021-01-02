@@ -1,5 +1,5 @@
 #' decumulate cumulative time series
-#' @param cumulative_data
+#' @param cumulative_data tibble. the cumulative time series. 
 #' @return tibble. "decumulated" time series, i.e. where variables represent the new counts since the previous count. 
 #' @export 
 rki_decumulate_data <- function(cumulative_data) {
