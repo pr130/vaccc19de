@@ -2,6 +2,7 @@ test_that("decumulating cumulative time series works", {
   cum_ts <- readr::read_csv("test_data/cumulative_ts.csv")
   decum_ts <- rki_extract_diffs(cum_ts)
 
+  expect_equal(ncol(decum_ts), 10)
   expect_true(all(c("indikation_nach_alter_neu", "berufliche_indikation_neu", "medizinische_indikation_neu", "pflegeheim_bewohner_in_neu", "impfungen_neu") %in% colnames(decum_ts)))
   berlin_alter <- decum_ts %>% 
     dplyr::filter(bundesland_iso == "BE") %>% 

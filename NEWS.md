@@ -1,3 +1,7 @@
+# vaccc19de 0.3.2
+* `rki_extract_diffs` drops "cumulative" columns
+# vaccc19de 0.3.1
+* `rki_extract_diffs` arranges data by ts_datenstand and bundesland
 # vaccc19de 0.3.0
 * `rki_extract_diffs` to extract "*decumulated*" time series data with the differences since the last update (#1)
 * `rki_download_diffs_ts` to download the data frame from GitHub

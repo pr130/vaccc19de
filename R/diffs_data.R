@@ -24,7 +24,7 @@ rki_extract_diffs <- function(cumulative_data) {
 
     decumulated_data <- decumulated_data %>% 
         dplyr::rename(impfungen_neu = differenz_zum_vortag) %>% 
-        dplyr::select(-impfungen_kumulativ) %>% 
+        dplyr::select(dplyr::starts_with("ts"), bundesland, bundesland_iso, dplyr::ends_with("_neu"), notes, dplyr::starts_with("x")) %>% # TODO: remove last statement as soon as #9 is fixed
         dplyr::arrange(ts_datenstand, bundesland)
 
     return(decumulated_data)
