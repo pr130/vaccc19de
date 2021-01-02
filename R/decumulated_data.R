@@ -1,4 +1,7 @@
+#' decumulate cumulative time series
 #' @param cumulative_data
+#' @return tibble. "decumulated" time series, i.e. where variables represent the new counts since the previous count. 
+#' @export 
 rki_decumulate_data <- function(cumulative_data) {
 
     # grouped lag 
@@ -23,4 +26,13 @@ rki_decumulate_data <- function(cumulative_data) {
         dplyr::rename(impfungen_neu = differenz_zum_vortag) %>% 
         dplyr::select(-impfungen_kumulativ)
     return(decumulated_data)
+}
+
+
+#' download decumulated time series from GitHub
+#' @export
+#' @return tibble. 'Decumulated' time series
+#' @description Downloads 'decumulated' time series from the `vaccc19de_rki_data` repository, more specifically https://raw.githubusercontent.com/friep/vaccc19de_rki_data/main/data/decumulated_time_series.csv
+rki_download_decumulated_ts <- function() {
+    readr::read_csv("https://raw.githubusercontent.com/friep/vaccc19de_rki_data/main/data/decumulated_time_series.csv")
 }
