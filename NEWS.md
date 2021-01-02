@@ -1,3 +1,9 @@
+# vaccc19de 0.3.0
+* `rki_extract_diffs` to extract "*decumulated*" time series data with the differences since the last update (#1)
+* `rki_download_diffs_ts` to download the data frame from GitHub
+* `rki_extract_cumulative_data` does not save csv anymore (#4)
+* `rki_extract_cumulative_data` uses `ts_download` from xlsx file path (#5)
+
 # vaccc19de 0.2.0
 * `rki_extract_cumulative_data` now parses comments (indicated by `*` in the excel sheet) into a separate column `notes`
 
