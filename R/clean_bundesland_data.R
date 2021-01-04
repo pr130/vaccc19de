@@ -4,6 +4,7 @@
 #' @description cleans column names, removes * from Bundesland column, merges Bundesland ISO code and removes "Gesamt"
 #' and comment rows at the end of the table. Returns one row for each Bundesland.
 #' @importFrom rlang .data
+#' @importFrom tidyr unite
 rki_clean_bundesland <- function(.data) {
 
   # clean column names
