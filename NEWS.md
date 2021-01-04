@@ -1,3 +1,5 @@
+# vaccc19de 0.3.3
+* `rki_clean_bundesland` integrates unnamed columns into the `notes` column (#9)
 # vaccc19de 0.3.2
 * `rki_extract_diffs` drops "cumulative" columns
 # vaccc19de 0.3.1
