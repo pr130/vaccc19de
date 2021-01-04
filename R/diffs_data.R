@@ -36,5 +36,5 @@ rki_extract_diffs <- function(cumulative_data) {
 #' @return tibble. Diffs time series with the diffs (created by `rki_diffs`)
 #' @description Downloads the diffs / 'decumulated' time series from the `vaccc19de_rki_data` repository, more specifically https://raw.githubusercontent.com/friep/vaccc19de_rki_data/main/data/decumulated_time_series.csv
 rki_download_diffs_ts <- function() {
-    readr::read_csv("https://raw.githubusercontent.com/friep/vaccc19de_rki_data/main/data/diffs_time_series.csv")
+    readr::read_csv("https://raw.githubusercontent.com/favstats/vaccc19de_dashboard/main/data/diffs_time_series.csv")
 }

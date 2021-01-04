@@ -1,3 +1,5 @@
+# vaccc19de 0.3.4
+* `rki_download_diffs_ts` and `rki_download_cumulative_ts` now download data from [https://github.com/favstats/vaccc19de_dashboard](https://github.com/favstats/vaccc19de_dashboard)
 # vaccc19de 0.3.3
 * `rki_clean_bundesland` integrates unnamed columns into the `notes` column (#9)
 # vaccc19de 0.3.2
