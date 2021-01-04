@@ -12,7 +12,7 @@ rki_clean_bundesland <- function(.data) {
 
   # bundeslaender
   bundeslaender <- tmp %>%
-      dplyr::slice_head(n = 16) 
+      dplyr::slice_head(n = 16)
 
   ## get annotations
   annotations <- tmp %>%
@@ -20,22 +20,30 @@ rki_clean_bundesland <- function(.data) {
     janitor::remove_empty("cols")
 
   if (nrow(annotations) > 0) {
-    annotations <- annotations %>% 
+    annotations <- annotations %>%
       dplyr::rename(annotation = .data$bundesland) %>%
       dplyr::mutate(star_count = stringr::str_count(.data$annotation, "\\*"),
                     annotation = stringr::str_trim(stringr::str_replace_all(.data$annotation, "\\*", "")))
     # join annotations
     bundeslaender <- bundeslaender %>%
-      dplyr::mutate(star_count = stringr::str_count(.data$bundesland, "\\*")) %>% 
+      dplyr::mutate(star_count = stringr::str_count(.data$bundesland, "\\*")) %>%
       dplyr::left_join(annotations, by = "star_count")
     # remove * from bundesland name column and clean up after join
     bundeslaender <- bundeslaender  %>%
-      dplyr::mutate(bundesland = stringr::str_trim(stringr::str_replace_all(.data$bundesland, "\\*", ""))) %>% 
-      dplyr::rename(notes = annotation) %>% 
+      dplyr::mutate(bundesland = stringr::str_trim(stringr::str_replace_all(.data$bundesland, "\\*", ""))) %>%
+      dplyr::rename(notes = annotation) %>%
       dplyr::select(-star_count)
   } else {
     # no annotations, add empty notes column
     bundeslaender$notes <- NA
+  }
+
+  # treat all "x" columns as additional, unnamed notes columns
+  if (any(stringr::str_detect(colnames(bundeslaender), "^x\\d{1,}$"))) {
+    bundeslaender <- bundeslaender  %>% 
+        tidyr::unite("notes_col", dplyr::matches("^x\\d{1,}$"), remove = TRUE, na.rm = TRUE, sep = "\n") %>% 
+        tidyr::unite("notes", notes, notes_col, remove = TRUE, na.rm = TRUE, sep = "\n") %>% 
+        dplyr::mutate(notes = dplyr::if_else(notes == "", NA_character_, stringr::str_trim(notes)))
   }
 
   # join iso code
