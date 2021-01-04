@@ -23,6 +23,7 @@ Imports:
     usethis,
     httr,
     purrr,
+    tidyr,
     readr,
     rvest,
     fs,
