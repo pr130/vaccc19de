@@ -12,6 +12,14 @@ output: github_document
 
 The goal of vaccc19de (**vacc**inations **c**ovid **19** **de**utschland) is to provide functions to easily get and extract data on the progress of vaccinations in German Bundesländer that is provided daily by the Robert-Koch-Institut (RKI) on [this page](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.html). The package is used to automatically collect data in the accompanying [vaccc19de_rki_data repository](https://github.com/friep/vaccc19de_rki_data).
 
+The package is used in the [vaccc19de_dashboard](https://github.com/favstats/vaccc19de_dashboard) repository where you can also find the current version of the following two datasets:
+
+- [cumulative data](https://github.com/favstats/vaccc19de_dashboard/blob/main/data/cumulative_time_series.csv)
+- ["decumulated" data of daily differences](https://github.com/favstats/vaccc19de_dashboard/blob/main/data/diffs_time_series.csv)
+
+Please refer to the README of the [vaccc19de_dashboard](https://github.com/favstats/vaccc19de_dashboard) for more information on the data. 
+
+
 ## Installation
 
 vaccc19de is not on CRAN. You can install the development version from GitHub with:

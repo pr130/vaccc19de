@@ -24,7 +24,9 @@ rki_extract_diffs <- function(cumulative_data) {
 
     decumulated_data <- decumulated_data %>% 
         dplyr::rename(impfungen_neu = differenz_zum_vortag) %>% 
-        dplyr::select(-impfungen_kumulativ)
+        dplyr::select(dplyr::starts_with("ts"), bundesland, bundesland_iso, dplyr::ends_with("_neu"), notes, dplyr::starts_with("x")) %>% # TODO: remove last statement as soon as #9 is fixed
+        dplyr::arrange(ts_datenstand, bundesland)
+
     return(decumulated_data)
 }
 
@@ -34,5 +36,5 @@ rki_extract_diffs <- function(cumulative_data) {
 #' @return tibble. Diffs time series with the diffs (created by `rki_diffs`)
 #' @description Downloads the diffs / 'decumulated' time series from the `vaccc19de_rki_data` repository, more specifically https://raw.githubusercontent.com/friep/vaccc19de_rki_data/main/data/decumulated_time_series.csv
 rki_download_diffs_ts <- function() {
-    readr::read_csv("https://raw.githubusercontent.com/friep/vaccc19de_rki_data/main/data/diffs_time_series.csv")
+    readr::read_csv("https://raw.githubusercontent.com/favstats/vaccc19de_dashboard/main/data/diffs_time_series.csv")
 }

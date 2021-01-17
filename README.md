@@ -15,9 +15,21 @@ The goal of vaccc19de (**vacc**inations **c**ovid **19**
 on the progress of vaccinations in German Bundesländer that is provided
 daily by the Robert-Koch-Institut (RKI) on [this
 page](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.html).
-The package is used to automatically collect data in the accompanying
-[vaccc19de\_rki\_data
-repository](https://github.com/friep/vaccc19de_rki_data).
+
+The package is used in the
+[vaccc19de\_dashboard](https://github.com/favstats/vaccc19de_dashboard)
+repository where you can also find the current version of the following
+two datasets:
+
+  - [cumulative
+    data](https://github.com/favstats/vaccc19de_dashboard/blob/main/data/cumulative_time_series.csv)
+  - [“decumulated” data of daily
+    differences](https://github.com/favstats/vaccc19de_dashboard/blob/main/data/diffs_time_series.csv)
+
+Please refer to the README of the
+[vaccc19de\_dashboard](https://github.com/favstats/vaccc19de_dashboard)
+for more information on the data.
+
 
 ## Installation
 
@@ -37,19 +49,10 @@ library(vaccc19de)
 path <- rki_download_xlsx() # returns path to xlsx invisibly
 ```
 
-    ## Scraping: https://www.rki.de//DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.xlsx;jsessionid=9557F9CC54B24A755B678DD5AEB72CA5.internet052?__blob=publicationFile
-
 ``` r
 # rki_extract_sheet_csvs(path) # optional to store the raw sheets as csvs
 cumulative <- rki_extract_cumulative_data(path)
 ```
-
-    ## New names:
-    ## * `` -> ...2
-    ## * `` -> ...3
-
-    ## New names:
-    ## * `` -> ...8
 
 Or download the full time series from
 [GitHub](https://github.com/favstats/vaccc19de_dashboard/tree/main/data):
@@ -90,9 +93,27 @@ diffs_ts
 Finally, you can also download the “decumulated” data directly from
 [GitHub](https://github.com/favstats/vaccc19de_dashboard/tree/main/data):
 
+
 ``` r
 cumulative_ts <- rki_download_diffs_ts()
 ```
+
+    ## 
+    ## ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+    ## cols(
+    ##   ts_datenstand = col_datetime(format = ""),
+    ##   ts_download = col_datetime(format = ""),
+    ##   bundesland = col_character(),
+    ##   bundesland_iso = col_character(),
+    ##   impfungen_kumulativ = col_double(),
+    ##   differenz_zum_vortag = col_double(),
+    ##   indikation_nach_alter = col_double(),
+    ##   berufliche_indikation = col_double(),
+    ##   medizinische_indikation = col_double(),
+    ##   pflegeheim_bewohner_in = col_double(),
+    ##   notes = col_character(),
+    ##   impfungen_pro_1_000_einwohner = col_double()
+    ## )
 
 ## Roadmap
 
