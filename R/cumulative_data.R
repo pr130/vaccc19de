@@ -18,8 +18,13 @@ rki_extract_cumulative_data <- function(xlsx_path) {
   ts_download <- get_download_ts_from_path(xlsx_path)
   bundesland_data_cleaned <- bundesland_data_cleaned %>%
     dplyr::mutate(ts_download = ts_download) %>%
-    dplyr::select(.data$ts_datenstand, .data$ts_download, dplyr::everything()) %>% 
-    dplyr::select(-rs) # we merge that in rki_clean_bundesland
+    dplyr::select(.data$ts_datenstand, .data$ts_download, dplyr::everything())
+  
+  # we merge regionalschlüssel as "RS" in rki_clean_bundesland, remove lowercase version if it exists
+  # (backwards compatability for older data)
+  if ("rs" %in% colnames(bundesland_data_cleaned)) {
+    bundesland_data_cleaned$rs <- NULL
+  }
   bundesland_data_cleaned
 
 }
