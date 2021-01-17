@@ -18,7 +18,8 @@ rki_extract_cumulative_data <- function(xlsx_path) {
   ts_download <- get_download_ts_from_path(xlsx_path)
   bundesland_data_cleaned <- bundesland_data_cleaned %>%
     dplyr::mutate(ts_download = ts_download) %>%
-    dplyr::select(.data$ts_datenstand, .data$ts_download, dplyr::everything())
+    dplyr::select(.data$ts_datenstand, .data$ts_download, dplyr::everything()) %>% 
+    dplyr::select(-rs) # we merge that in rki_clean_bundesland
   bundesland_data_cleaned
 
 }
