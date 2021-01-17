@@ -13,6 +13,11 @@ rki_clean_bundesland <- function(.data) {
   # bundeslaender
   bundeslaender <- tmp %>%
       dplyr::slice_head(n = 16) 
+    
+  gesamt_row <- tmp %>% 
+    dplyr::filter(.data$bundesland == "Gesamt" | .data$bundesland == "gesamt")
+  bundeslaender$gesamt_kumulativ <- gesamt_row %>% dplyr::pull(impfungen_kumulativ)
+  bundeslaender$gesamt_differenz_zum_vortag <- gesamt_row %>% dplyr::pull(differenz_zum_vortag)
 
   ## get annotations
   annotations <- tmp %>%
