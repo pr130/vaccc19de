@@ -9,9 +9,19 @@
 rki_extract_cumulative_data <- function(xlsx_path) {
 
   erlaeuterung <- readxl::read_excel(xlsx_path, sheet = 1)
-  bundesland_data <- readxl::read_excel(xlsx_path, sheet = 2)
-  bundesland_data_cleaned <- rki_clean_bundesland(bundesland_data)
   ts_datenstand <- rki_get_timestamp(erlaeuterung)
+
+  if(ts_datenstand >= as.Date("2021-01-18")){
+
+    bundesland_data <- tidyxl::xlsx_cells(xlsx_path, sheet = 2:3)
+
+  } else {
+
+    bundesland_data <- readxl::read_excel(xlsx_path, sheet = 2)
+
+  }
+
+  bundesland_data_cleaned <- rki_clean_bundesland(bundesland_data)
   bundesland_data_cleaned$ts_datenstand <- ts_datenstand
 
   # get download_ts from xlsx path
@@ -19,7 +29,7 @@ rki_extract_cumulative_data <- function(xlsx_path) {
   bundesland_data_cleaned <- bundesland_data_cleaned %>%
     dplyr::mutate(ts_download = ts_download) %>%
     dplyr::select(.data$ts_datenstand, .data$ts_download, dplyr::everything())
-  
+
   # we merge regionalschlüssel as "RS" in rki_clean_bundesland, remove lowercase version if it exists
   # (backwards compatability for older data)
   if ("rs" %in% colnames(bundesland_data_cleaned)) {

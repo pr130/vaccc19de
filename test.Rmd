@@ -1,0 +1,72 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+library(vaccc19de)
+path <- rki_download_xlsx() # returns path to xlsx invisibly
+# rki_extract_sheet_csvs(path) # optional to store the raw sheets as csvs
+
+debugonce(vaccc19de:::rki_clean_bundesland)
+
+# vaccc19de::
+
+rki_extract_cumulative_data("tests/testthat/test_data/impfquotenmonitoring.xlsx")
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+clean_tmp <- tmp %>%
+    janitor::clean_names() %>% 
+    dplyr::mutate(bundesland_note = "")
+
+# stringr::str_starts("*dd", "\\*")
+
+annotations <- clean_tmp %>% 
+  dplyr::filter(stringr::str_starts(bundesland, "\\*")) %>% 
+  janitor::remove_empty("cols") %>% 
+  dplyr::rename(annotation = bundesland) %>% 
+  dplyr::mutate(star_count = stringr::str_count(annotation, "\\*")) %>%
+  dplyr::mutate(annotation = stringr::str_replace_all(annotation, "\\*", ""))
+
+
+if(any(str_detect(clean_tmp$bundesland, "\\*"))){ ## if there are any annotations for a bundesland
+  
+  if(nrow(annotations)==2){  ## if there are exactly two annotations
+    
+    clean_tmp <- clean_tmp %>% 
+      dplyr::mutate(bundesland_note = ifelse(stringr::str_detect(bundesland, "\\*\\*"),
+                                             annotations$annotation[2],
+                                             NA_character_))
+    
+  } else if(nrow(annotations)>2){ ## if there are more than two annotations
+    for (jj in 2:nrow(annotations)) { ## go through all annotations and paste them together with a \n
+     clean_tmp <- clean_tmp %>% 
+      dplyr::mutate(bundesland_note = ifelse(stringr::str_detect(bundesland, strrep("\\*", jj)),
+                                             paste0(bundesland_note, annotations$annotation[jj], "\n"),
+                                             bundesland_note))   
+    }  
+  }
+}
+
+    mutate(bundesland_note = ifelse(str_detect("\\*\\*", )))
+    dplyr::slice_head(n = 16) %>%
+    dplyr::mutate(bundesland = stringr::str_replace_all(.data$bundesland, "\\*", "")) # replace ** in data
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
