@@ -1,11 +1,10 @@
-#' clean data
-#' @param .data raw data frame of sheet "Presse"
-#' @return cleaned data in wide format
-#' @description cleans column names, removes * from Bundesland column, merges Bundesland ISO code and removes "Gesamt"
-#' and comment rows at the end of the table. Returns one row for each Bundesland.
+#' extract annotations from raw data
+#' @param .data raw data frame of the sheet with the bundesland data
+#' @return data frame with Bundesland info and annotations
+#' @description extract annotations
 #' @importFrom rlang .data
 #' @importFrom tidyr unite
-rki_clean_bundesland <- function(.data) {
+rki_extract_annotations <- function(.data) {
 
   # clean column names
   tmp <- .data %>%
@@ -15,11 +14,6 @@ rki_clean_bundesland <- function(.data) {
   bundeslaender <- tmp %>%
     dplyr::slice_head(n = 16) 
     
-  gesamt_row <- tmp %>% 
-    dplyr::filter(.data$bundesland == "Gesamt" | .data$bundesland == "gesamt")
-  bundeslaender$gesamt_kumulativ <- gesamt_row %>% dplyr::pull(impfungen_kumulativ)
-  bundeslaender$gesamt_differenz_zum_vortag <- gesamt_row %>% dplyr::pull(differenz_zum_vortag)
-
   ## get annotations
   annotations <- tmp %>%
     dplyr::filter(stringr::str_starts(.data$bundesland, "\\*")) %>%
@@ -59,5 +53,6 @@ rki_clean_bundesland <- function(.data) {
   if (any(is.na(merged$bundesland_iso))) {
     usethis::ui_warn("Not all Bundeslaender could be matched to ISO codes.")
   }
-  return(merged)
+  merged %>% 
+    dplyr::select(bundesland, bundesland_iso, notes)
 }
