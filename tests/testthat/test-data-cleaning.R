@@ -19,3 +19,12 @@ test_that("note extraction works with no note", {
   expect_equal(ncol(cleaned), 3)
   expect_true(all(is.na(cleaned$notes)))
 })
+
+
+test_that("note extraction works for new data", {
+  df <- tidyxl::xlsx_cells("test_data/impfmonitoring_new_format_zweitimpfung.xlsx", sheet = 2)
+  cleaned <- rki_extract_annotations(df)
+  expect_equal(ncol(cleaned), 3)
+  expect_equal(cleaned$notes[cleaned$bundesland_iso == "SH"], "(Indikation für Zweitimpfung werden nachgereicht)")
+  expect_equal(cleaned$notes[cleaned$bundesland_iso == "BB"], "(Indikation für Zweitimpfung werden nachgereicht)")
+})

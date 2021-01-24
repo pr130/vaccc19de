@@ -30,6 +30,8 @@ Imports:
     glue,
     memoise,
     robotstxt,
+    tidyxl,
+    unpivotr,
     here,
     rlang
 Depends: 

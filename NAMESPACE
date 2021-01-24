@@ -2,10 +2,8 @@
 
 export("%>%")
 export(get_common_path)
-export(rki_download_cumulative_ts)
 export(rki_download_diffs_ts)
 export(rki_download_xlsx)
-export(rki_extract_cumulative_data)
 export(rki_extract_diffs)
 export(rki_extract_sheet_csvs)
 importFrom(magrittr,"%>%")
