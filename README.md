@@ -10,6 +10,9 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/vaccc19de)](https://CRAN.R-project.org/package=vaccc19de)
 <!-- badges: end -->
 
+:warning: most functions will be retired / deleted soon because they do not work anymore after the RKI adapted their excel and we do not parse the data ourselves anymore for the dashboard. If you want to work on the package to update the functions, please let me know. :warning: 
+
+
 The goal of vaccc19de (**vacc**inations **c**ovid **19**
 **de**utschland) is to provide functions to easily get and extract data
 on the progress of vaccinations in German Bundesländer that is provided
