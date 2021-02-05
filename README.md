@@ -3,7 +3,6 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/friep/vaccc19de/workflows/R-CMD-check/badge.svg)](https://github.com/friep/vaccc19de/actions)
 [![Lifecycle:
 archived](https://img.shields.io/badge/lifecycle-archived-red.svg)](https://www.tidyverse.org/lifecycle/#archived)
 <!-- badges: end -->
@@ -42,7 +41,7 @@ The goal of vaccc19de (**vacc**inations **c**ovid **19**
 on the progress of vaccinations in German Bundesländer that is provided
 daily by the Robert-Koch-Institut (RKI) on [this
 page](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.html).
-The package is used to automatically collect data in the accompanying
+The package was used to automatically collect data in the accompanying
 [vaccc19de\_rki\_data
 repository](https://github.com/friep/vaccc19de_rki_data).
 
@@ -76,73 +75,17 @@ Download the currently available data from the RKI:
 ``` r
 library(vaccc19de)
 path <- rki_download_xlsx() # returns path to xlsx invisibly
-```
-
-<<<<<<< Updated upstream
-    ## Scraping: https://www.rki.de//DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.xlsx;jsessionid=1ED848D013B4843A358E88800BDEFC7F.internet061?__blob=publicationFile
-=======
-    ## Scraping: https://www.rki.de//DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.xlsx;jsessionid=40579341F95A474CE7F9B6F086B4250F.internet072?__blob=publicationFile
->>>>>>> Stashed changes
-
-``` r
 # rki_extract_sheet_csvs(path) # optional to store the raw sheets as csvs
 cumulative <- rki_extract_cumulative_data(path)
 ```
-
-    ## New names:
-    ## * `` -> ...5
-    ## * `` -> ...6
-    ## * `` -> ...7
-    ## * `` -> ...8
-    ## * `` -> ...10
-    ## * ...
 
 Or download the full time series from
 [GitHub](https://github.com/favstats/vaccc19de_dashboard/tree/main/data):
 
 ``` r
 cumulative_ts <- rki_download_cumulative_ts()
-```
-
-    ## 
-    ## ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-    ## cols(
-    ##   ts_datenstand = col_datetime(format = ""),
-    ##   ts_download = col_datetime(format = ""),
-    ##   bundesland = col_character(),
-    ##   bundesland_iso = col_character(),
-    ##   impfungen_kumulativ = col_double(),
-    ##   differenz_zum_vortag = col_double(),
-    ##   indikation_nach_alter = col_double(),
-    ##   berufliche_indikation = col_double(),
-    ##   medizinische_indikation = col_double(),
-    ##   pflegeheim_bewohner_in = col_double(),
-    ##   notes = col_character(),
-    ##   impfungen_pro_1_000_einwohner = col_double()
-    ## )
-
-``` r
 cumulative_ts
 ```
-
-    ## # A tibble: 128 x 12
-    ##    ts_datenstand       ts_download         bundesland bundesland_iso
-    ##    <dttm>              <dttm>              <chr>      <chr>         
-    ##  1 2020-12-28 15:15:00 2020-12-28 14:39:57 Baden-Wür… BW            
-    ##  2 2020-12-28 15:15:00 2020-12-28 14:39:57 Bayern     BY            
-    ##  3 2020-12-28 15:15:00 2020-12-28 14:39:57 Berlin     BE            
-    ##  4 2020-12-28 15:15:00 2020-12-28 14:39:57 Brandenbu… BB            
-    ##  5 2020-12-28 15:15:00 2020-12-28 14:39:57 Bremen     HB            
-    ##  6 2020-12-28 15:15:00 2020-12-28 14:39:57 Hamburg    HH            
-    ##  7 2020-12-28 15:15:00 2020-12-28 14:39:57 Hessen     HE            
-    ##  8 2020-12-28 15:15:00 2020-12-28 14:39:57 Mecklenbu… MV            
-    ##  9 2020-12-28 15:15:00 2020-12-28 14:39:57 Niedersac… NI            
-    ## 10 2020-12-28 15:15:00 2020-12-28 14:39:57 Nordrhein… NW            
-    ## # … with 118 more rows, and 8 more variables: impfungen_kumulativ <dbl>,
-    ## #   differenz_zum_vortag <dbl>, indikation_nach_alter <dbl>,
-    ## #   berufliche_indikation <dbl>, medizinische_indikation <dbl>,
-    ## #   pflegeheim_bewohner_in <dbl>, notes <chr>,
-    ## #   impfungen_pro_1_000_einwohner <dbl>
 
 “decumulate” it / create the time series of differences:
 
