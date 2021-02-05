@@ -5,14 +5,30 @@ output: github_document
 # vaccc19de
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![R-CMD-check](https://github.com/friep/vaccc19de/workflows/R-CMD-check/badge.svg)](https://github.com/friep/vaccc19de/actions)
-[![CRAN status](https://www.r-pkg.org/badges/version/vaccc19de)](https://CRAN.R-project.org/package=vaccc19de)
+[![Lifecycle: archived](https://img.shields.io/badge/lifecycle-archived-red.svg)](https://www.tidyverse.org/lifecycle/#archived)
 <!-- badges: end -->
 
-The goal of vaccc19de (**vacc**inations **c**ovid **19** **de**utschland) is to provide functions to easily get and extract data on the progress of vaccinations in German Bundesländer that is provided daily by the Robert-Koch-Institut (RKI) on [this page](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.html). 
+`r emo::ji("warning")` we have stopped the development of the package and the accompanying [dashboard](https://github.com/favstats/vaccc19de_dashboard). Functions in this package most likely do not work anymore. `r emo::ji("warning")`
 
-The package is used in the [vaccc19de_dashboard](https://github.com/favstats/vaccc19de_dashboard) repository where you can also find the current version of the following two datasets:
+**Why are we retiring the package / dashboard?**
+
+This project was a spontaneous collaboration between [Fabio](https://github.com/favstats) and me when we realized at the end of December 2020 that
+
+1) data was not published as time series data but instead was being overwritten each day, i.e. no history was available to the public 
+2) no official dashboard or visualization existed 
+
+Re 1) there is [this daily-updated archive](https://github.com/ard-data/2020-rki-impf-archive) which we have used for the dashboard in the past weeks 
+
+Re 2) Although the [official dashboard](https://impfdashboard.de/) is lacking in certain areas (e.g. no Bundesland-level analyses), it provides a good overview over the progress of the vaccinations. 
+
+Finally, given that the constantly changing format and quality of the Excel download requires constant adaptation of the code, we cannot realistically guarantee the integrity and correctness of our dashboard with our limited time resources. 
+
+-------------
+
+The goal of vaccc19de (**vacc**inations **c**ovid **19** **de**utschland) was to provide functions to easily get and extract data on the progress of vaccinations in German Bundesländer that is provided daily by the Robert-Koch-Institut (RKI) on [this page](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.html). The package is used to automatically collect data in the accompanying [vaccc19de_rki_data repository](https://github.com/friep/vaccc19de_rki_data).
+
+The package was used in the [vaccc19de_dashboard](https://github.com/favstats/vaccc19de_dashboard) repository where you can also find the current version of the following two datasets:
 
 - [cumulative data](https://github.com/favstats/vaccc19de_dashboard/blob/main/data/cumulative_time_series.csv)
 - ["decumulated" data of daily differences](https://github.com/favstats/vaccc19de_dashboard/blob/main/data/diffs_time_series.csv)
@@ -47,7 +63,7 @@ cumulative_ts
 ```
 
 "decumulate" it / create the time series of differences:
-```{r}
+```{r, eval=FALSE}
 diffs_ts <- rki_extract_diffs(cumulative_ts)
 diffs_ts
 ```
